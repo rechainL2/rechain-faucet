@@ -148,6 +148,7 @@
       </button>
     </div>
   </div>
+  <div id="hcaptcha" data-size="invisible"></div>
 
   <img class="footer-image" src="/footer-bg.png" alt="">
 </main>
