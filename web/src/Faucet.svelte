@@ -26,9 +26,7 @@
     hcaptchaLoaded = true;
   };
 
-  $: document.title = `${faucetInfo.symbol} ${capitalize(
-    faucetInfo.network,
-  )} Faucet`;
+  $: document.title = `Re:Chain Faucet`;
 
   let widgetID;
   $: if (mounted && hcaptchaLoaded) {
@@ -117,90 +115,140 @@
   {/if}
 </svelte:head>
 
-<main>
-  <section class="hero is-info is-fullheight">
-    <div class="hero-head">
-      <nav class="navbar">
-        <div class="container">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="../..">
-              <span class="icon">
-                <i class="fa fa-bath" />
-              </span>
-              <span><b>{faucetInfo.symbol} Faucet</b></span>
-            </a>
-          </div>
-          <div id="navbarMenu" class="navbar-menu">
-            <div class="navbar-end">
-              <span class="navbar-item">
-                <a
-                  class="button is-white is-outlined"
-                  href="https://github.com/chainflag/eth-faucet"
-                >
-                  <span class="icon">
-                    <i class="fa fa-github" />
-                  </span>
-                  <span>View Source</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
-      </nav>
+<main class="main">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+  </style>
+
+  <div class="container">
+    <div class="header">
+      <img class="header__logo" src="/favicon.png" alt="">
+      <h1 class="header__heading">Re:Chain Faucet</h1>
+      <p class="header__subheading">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem similique repellendus ab iste magni. Voluptates nulla qui culpa dolore assumenda?</p>
     </div>
 
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <div class="column is-6 is-offset-3">
-          <h1 class="title">
-            Receive {faucetInfo.payout}
-            {faucetInfo.symbol} per request
-          </h1>
-          <h2 class="subtitle">
-            Serving from {faucetInfo.account}
-          </h2>
-          <div id="hcaptcha" data-size="invisible"></div>
-          <div class="box">
-            <div class="field is-grouped">
-              <p class="control is-expanded">
-                <input
-                  bind:value={input}
-                  class="input is-rounded"
-                  type="text"
-                  placeholder="Enter your address or ENS name"
-                />
-              </p>
-              <p class="control">
-                <button
-                  on:click={handleRequest}
-                  class="button is-primary is-rounded"
-                >
-                  Request
-                </button>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="form">
+      <p class="form__address">
+        <strong>Serving from</strong>
+        <code>{faucetInfo.account}</code>
+      </p>
+
+      <input
+        class="form__input"
+        bind:value={input}
+        type="text"
+        placeholder="Enter your address or ENS name"
+      />
+
+      <button
+        class="form__button"
+        on:click={handleRequest}
+      >
+        Request {faucetInfo.payout} Re:Chain Token
+      </button>
     </div>
-  </section>
+  </div>
+
+  <img class="footer-image" src="/footer-bg.png" alt="">
 </main>
 
 <style>
-  .hero.is-info {
-    background:
-      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url('/background.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  * {
+    box-sizing: border-box;
+    font-family: 'Roboto Serif', sans-serif;
   }
-  .hero .subtitle {
-    padding: 3rem 0;
-    line-height: 1.5;
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
-  .box {
-    border-radius: 19px;
+
+  .container {
+    width: 100%;
+    max-width: 520px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .header {
+    padding-top: 6rem;
+    text-align: center;
+  }
+
+  .header__logo {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 16px;
+  }
+
+  .header__heading {
+    font-size: 24px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 8px;
+  }
+
+  .form {
+    margin-top: 32px;
+    border: 1px solid rgb(222, 226, 230);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 5rem;
+  }
+
+  .form__address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .form__address > strong {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .form__address > code {
+    font-size: 18px;
+    color: #666;
+    background: transparent !important;
+  }
+
+  .form__input {
+    width: 100%;
+    padding: 8px 12px;
+    margin-top: 16px;
+    border: 1px solid rgb(222, 226, 230);
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 30px;
+    font-family: monospace;
+  }
+
+  .form__button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 32px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #40c057;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .footer-image {
+    flex: none;
+    max-height: 160px;
+    margin: 24px auto 0;
   }
 </style>
